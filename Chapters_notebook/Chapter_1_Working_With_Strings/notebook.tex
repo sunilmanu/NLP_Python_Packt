@@ -1,0 +1,1090 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Chapter 1 - Working with Strings}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    This chapter will include the following topics:
+• Tokenization of text
+• Normalization of text
+• Substituting and correcting tokens
+• Applying Zipf's law to text
+• Applying similarity measures using the Edit Distance Algorithm
+• Applying similarity measures using Jaccard's Coefficient
+• Applying similarity measures using Smith Waterman
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{k+kn}{import} \PY{n+nn}{warnings}
+          \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{tokenization}{%
+\section{Tokenization}\label{tokenization}}
+
+Tokenization may be defined as the process of splitting the text into
+smaller parts called tokens, and is considered a crucial step in NLP.
+
+    \hypertarget{tokenization-of-text-into-sentences}{%
+\subsubsection{Tokenization of text into
+sentences}\label{tokenization-of-text-into-sentences}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+        \PY{n}{text}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Welcome readers. I hope you find it interesting. Please do reply.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{sent\PYZus{}tokenize}
+        \PY{n}{sent\PYZus{}tokenize}\PY{p}{(}\PY{n}{text}\PY{p}{)}    \PY{c+c1}{\PYZsh{} Uses PunktSentenceTokenizer for tokenizing.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} [' Welcome readers.', 'I hope you find it interesting.', 'Please do reply.']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+        \PY{n}{tokenizer}\PY{o}{=}\PY{n}{nltk}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tokenizers/punkt/english.pickle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{text}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Welcome readers. I hope you find it interesting. Please do reply.}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{tokenizer}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{text}\PY{p}{)}   \PY{c+c1}{\PYZsh{} We can load PunktSentenceTokenizer and use the tokenize() function.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} ['Welcome readers.', 'I hope you find it interesting.', 'Please do reply.']
+\end{Verbatim}
+            
+    \hypertarget{tokenization-of-text-in-other-languages}{%
+\subsubsection{Tokenization of text in other
+languages}\label{tokenization-of-text-in-other-languages}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+        \PY{n}{french\PYZus{}tokenizer}\PY{o}{=}\PY{n}{nltk}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tokenizers/punkt/french.pickle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{french\PYZus{}tokenizer}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+s2}{Deux agressions en quelques jours,voilà ce qui a motivé hier matin le débrayage collège francobritanniquedeLevallois\PYZhy{}Perret. Deuxagressions en quelques jours,voilà ce qui a motivé hier matin le débrayage Levallois. Léquipepédagogique de ce collège de 750 élèves avait déjà été choquéepar l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{agression, janvier , d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{un professeur d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{histoire. L}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{équipepédagogique de ce collège de 750 élèves avait déjà été choquée parl}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{agression, mercredi , d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{un professeur d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{histoire}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} ['Deux agressions en quelques jours,voilà ce qui a motivé hier matin le débrayage collège francobritanniquedeLevallois-Perret.',
+          'Deuxagressions en quelques jours,voilà ce qui a motivé hier matin le débrayage Levallois.',
+          'Léquipepédagogique de ce collège de 750 élèves avait déjà été choquéepar l\textbackslash{}'"agression, janvier , d\textbackslash{}'un professeur d\textbackslash{}'histoire.',
+          "L'équipepédagogique de ce collège de 750 élèves avait déjà été choquée parl'agression, mercredi , d'un professeur d'histoire"]
+\end{Verbatim}
+            
+    \hypertarget{tokenization-of-sentences-into-words}{%
+\subsubsection{Tokenization of sentences into
+words}\label{tokenization-of-sentences-into-words}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{text}\PY{o}{=}\PY{n}{nltk}\PY{o}{.}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PierreVinken , 59 years old , will joinas a nonexecutive director on Nov. 29}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{c+c1}{\PYZsh{} word\PYZus{}tokenize function uses an instance of NLTK known as TreebankWordTokenizer.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['PierreVinken', ',', '59', 'years', 'old', ',', 'will', 'joinas', 'a', 'nonexecutive', 'director', 'on', 'Nov.', '29']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} list
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{from} \PY{n+nn}{nltk} \PY{k}{import} \PY{n}{word\PYZus{}tokenize}
+         \PY{n}{r}\PY{o}{=}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Please write a text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The length of text is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{r}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{words}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Please write a texthello everyone how are you??
+The length of text is 7 words
+
+    \end{Verbatim}
+
+    \hypertarget{tokenization-using-treebankwordtokenizer}{%
+\subsubsection{Tokenization using
+TreebankWordTokenizer}\label{tokenization-using-treebankwordtokenizer}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{TreebankWordTokenizer}
+         \PY{n}{tokenizer} \PY{o}{=} \PY{n}{TreebankWordTokenizer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{result} \PY{o}{=} \PY{n}{tokenizer}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t hesitate to ask questions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} ['Do', "n't", 'hesitate', 'to', 'ask', 'questions']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} list
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{WordPunctTokenizer}
+         \PY{n}{tokenizer}\PY{o}{=}\PY{n}{WordPunctTokenizer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{tokenizer}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t hesitate to ask questions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} ['Don', "'", 't', 'hesitate', 'to', 'ask', 'questions']
+\end{Verbatim}
+            
+    \hypertarget{types-of-tokenizers}{%
+\section{Types of Tokenizers}\label{types-of-tokenizers}}
+
+    \begin{verbatim}
+                                 Tokenizer   
+                                 
+      PunktWord Tokenizer        Regex Tokenizer                         TreeBank Tokenizer 
+                               - WordPunct Tokenizer
+                               - Whitespace Tokenizer 
+\end{verbatim}
+
+    \hypertarget{tokenization-using-regular-expressions}{%
+\subsubsection{Tokenization using regular
+expressions}\label{tokenization-using-regular-expressions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{RegexpTokenizer}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{BlanklineTokenizer}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{WhitespaceTokenizer}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{LineTokenizer}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{SpaceTokenizer}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize}\PY{n+nn}{.}\PY{n+nn}{util} \PY{k}{import} \PY{n}{spans\PYZus{}to\PYZus{}relative}
+         \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize}\PY{n+nn}{.}\PY{n+nn}{util} \PY{k}{import} \PY{n}{string\PYZus{}span\PYZus{}tokenize}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{tokenizer}\PY{o}{=}\PY{n}{RegexpTokenizer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{gaps}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{tokenizer}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t hesitate to ask questions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} ["Don't", 'hesitate', 'to', 'ask', 'questions']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{sent}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ She secured 90.56 }\PY{l+s+si}{\PYZpc{} i}\PY{l+s+s2}{n class X . She is a meritorious student}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{capt} \PY{o}{=} \PY{n}{RegexpTokenizer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[A\PYZhy{}Z]}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{capt}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} ['She', 'She']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{sent}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ She secured 90.56 }\PY{l+s+si}{\PYZpc{} i}\PY{l+s+s2}{n class X . She is a meritorious student}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{BlanklineTokenizer}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} [' She secured 90.56 \% in class X . She is a meritorious student']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{WhitespaceTokenizer}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} ['She',
+          'secured',
+          '90.56',
+          '\%',
+          'in',
+          'class',
+          'X',
+          '.',
+          'She',
+          'is',
+          'a',
+          'meritorious',
+          'student']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{sent}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} ['She',
+          'secured',
+          '90.56',
+          '\%',
+          'in',
+          'class',
+          'X',
+          '.',
+          'She',
+          'is',
+          'a',
+          'meritorious',
+          'student']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{sent}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} ['',
+          'She',
+          'secured',
+          '90.56',
+          '\%',
+          'in',
+          'class',
+          'X',
+          '.',
+          'She',
+          'is',
+          'a',
+          'meritorious',
+          'student']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{sent}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ She secured 90.56 }\PY{l+s+si}{\PYZpc{} i}\PY{l+s+s2}{n class X }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{. She is a meritorious student}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{sent}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} [' She secured 90.56 \% in class X ', '. She is a meritorious student', '']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{LineTokenizer}\PY{p}{(}\PY{n}{blanklines}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{discard}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} [' She secured 90.56 \% in class X ', '. She is a meritorious student']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{LineTokenizer}\PY{p}{(}\PY{n}{blanklines}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} [' She secured 90.56 \% in class X ', '. She is a meritorious student']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{SpaceTokenizer}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} ['',
+          'She',
+          'secured',
+          '90.56',
+          '\%',
+          'in',
+          'class',
+          'X',
+          '\textbackslash{}n.',
+          'She',
+          'is',
+          'a',
+          'meritorious',
+          'student\textbackslash{}n']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{WhitespaceTokenizer}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{span\PYZus{}tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} [(1, 4),
+          (5, 12),
+          (13, 18),
+          (19, 20),
+          (21, 23),
+          (24, 29),
+          (30, 31),
+          (33, 34),
+          (35, 38),
+          (39, 41),
+          (42, 43),
+          (44, 55),
+          (56, 63)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n}{string\PYZus{}span\PYZus{}tokenize}\PY{p}{(}\PY{n}{sent}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} [(1, 4),
+          (5, 12),
+          (13, 18),
+          (19, 20),
+          (21, 23),
+          (24, 29),
+          (30, 31),
+          (32, 34),
+          (35, 38),
+          (39, 41),
+          (42, 43),
+          (44, 55),
+          (56, 64)]
+\end{Verbatim}
+            
+    \hypertarget{normalization}{%
+\section{Normalization}\label{normalization}}
+
+    In order to carry out processing on natural language text, we need to
+perform normalization that mainly involves eliminating punctuation,
+converting the entire text into lowercase or uppercase, converting
+numbers into words, expanding abbreviations, canonicalization of text,
+and so on.
+
+    \hypertarget{eliminating-punctuation}{%
+\subsubsection{Eliminating punctuation}\label{eliminating-punctuation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{word\PYZus{}tokenize}
+         \PY{k+kn}{import} \PY{n+nn}{re}
+         \PY{k+kn}{import} \PY{n+nn}{string}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{text}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ It is a pleasant evening.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Guests, who came from US arrived at the venue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Food was tasty.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{tokenized\PYZus{}docs}\PY{o}{=}\PY{p}{[}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{doc}\PY{p}{)} \PY{k}{for} \PY{n}{doc} \PY{o+ow}{in} \PY{n}{text}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tokenized\PYZus{}docs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[['It', 'is', 'a', 'pleasant', 'evening', '.'], ['Guests', ',', 'who', 'came', 'from', 'US', 'arrived', 'at', 'the', 'venue'], ['Food', 'was', 'tasty', '.']]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{tokenized\PYZus{}docs}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} list
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{x}\PY{o}{=}\PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{re}\PY{o}{.}\PY{n}{escape}\PY{p}{(}\PY{n}{string}\PY{o}{.}\PY{n}{punctuation}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tokenized\PYZus{}docs\PYZus{}no\PYZus{}punctuation} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{review} \PY{o+ow}{in} \PY{n}{tokenized\PYZus{}docs}\PY{p}{:}
+             \PY{n}{new\PYZus{}review} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{token} \PY{o+ow}{in} \PY{n}{review}\PY{p}{:}
+                 \PY{n}{new\PYZus{}token} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{u}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{token}\PY{p}{)}
+                 \PY{k}{if} \PY{o+ow}{not} \PY{n}{new\PYZus{}token} \PY{o}{==} \PY{l+s+sa}{u}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{new\PYZus{}review}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}token}\PY{p}{)}
+             \PY{n}{tokenized\PYZus{}docs\PYZus{}no\PYZus{}punctuation}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}review}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{tokenized\PYZus{}docs\PYZus{}no\PYZus{}punctuation}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[['It', 'is', 'a', 'pleasant', 'evening'], ['Guests', 'who', 'came', 'from', 'US', 'arrived', 'at', 'the', 'venue'], ['Food', 'was', 'tasty']]
+
+    \end{Verbatim}
+
+    \hypertarget{conversion-into-lowercase-and-uppercase}{%
+\subsubsection{Conversion into lowercase and
+uppercase}\label{conversion-into-lowercase-and-uppercase}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{text}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HARdWork IS KEy to SUCCESS}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{text}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hardwork is key to success
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{text}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+HARDWORK IS KEY TO SUCCESS
+
+    \end{Verbatim}
+
+    \hypertarget{dealing-with-stop-words}{%
+\subsubsection{Dealing with stop words}\label{dealing-with-stop-words}}
+
+    Stop words are words that need to be filtered out during the task of
+information retrieval or other natural language tasks, as these words do
+not contribute much to the overall meaning of the sentence. There are
+many search engines that work by deleting stop words so as to reduce the
+search space. Elimination of stopwords is considered one of the
+normalization tasks that is crucial in NLP.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{stopwords}
+         \PY{n}{stops}\PY{o}{=}\PY{n+nb}{set}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{words}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Don}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hesitate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ask}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{questions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{p}{[}\PY{n}{word} \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{words} \PY{k}{if} \PY{n}{word} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{stops}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:} ["Don't", 'hesitate', 'ask', 'questions']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{stops}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}82}]:} 179
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{fileids}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{stopwords}\PY{o}{.}\PY{n}{fileids}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:} ['arabic',
+          'azerbaijani',
+          'danish',
+          'dutch',
+          'english',
+          'finnish',
+          'french',
+          'german',
+          'greek',
+          'hungarian',
+          'indonesian',
+          'italian',
+          'kazakh',
+          'nepali',
+          'norwegian',
+          'portuguese',
+          'romanian',
+          'russian',
+          'spanish',
+          'swedish',
+          'turkish']
+\end{Verbatim}
+            
+    \hypertarget{substituting-and-correcting-tokens}{%
+\section{Substituting and correcting
+tokens}\label{substituting-and-correcting-tokens}}
+
+    In this section, we will discuss the replacement of tokens with other
+tokens. We will also see how we can correct the spelling of tokens by
+replacing incorrectly spelled tokens with correctly spelled tokens.
+
+    \hypertarget{replacing-words-using-regular-expressions}{%
+\subsubsection{Replacing words using regular
+expressions}\label{replacing-words-using-regular-expressions}}
+
+    Previously, we faced problems while performing tokenization for
+contractions. Using text replacement, we can replace contractions with
+their expanded versions. For example, doesn't can be replaced by does
+not.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{c+c1}{\PYZsh{} save the below code as a python file  \PYZhy{} replacers.py}
+         \PY{k+kn}{import} \PY{n+nn}{re}
+         \PY{n}{replacement\PYZus{}patterns} \PY{o}{=} \PY{p}{[}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{won}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{will not}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{can}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cannot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i am}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ain}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is not}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+)}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ll}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{g\PYZlt{}1\PYZgt{} will}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+)n}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{g\PYZlt{}1\PYZgt{} not}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+)}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{ve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{g\PYZlt{}1\PYZgt{} have}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+)}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{g\PYZlt{}1\PYZgt{} is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+)}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{re}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{g\PYZlt{}1\PYZgt{} are}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+         \PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w+)}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{g\PYZlt{}1\PYZgt{} would}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{p}{]}
+         \PY{k}{class} \PY{n+nc}{RegexpReplacer}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{patterns}\PY{o}{=}\PY{n}{replacement\PYZus{}patterns}\PY{p}{)}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{patterns} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{regex}\PY{p}{)}\PY{p}{,} \PY{n}{repl}\PY{p}{)} \PY{k}{for} \PY{p}{(}\PY{n}{regex}\PY{p}{,} \PY{n}{repl}\PY{p}{)}\PY{o+ow}{in} \PY{n}{patterns}\PY{p}{]}
+                 \PY{k}{def} \PY{n+nf}{replace}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{text}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{s} \PY{o}{=} \PY{n}{text}
+                     \PY{k}{for} \PY{p}{(}\PY{n}{pattern}\PY{p}{,} \PY{n}{repl}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{patterns}\PY{p}{:}
+                         \PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{count}\PY{p}{)} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{subn}\PY{p}{(}\PY{n}{pattern}\PY{p}{,} \PY{n}{repl}\PY{p}{,} \PY{n}{s}\PY{p}{)}
+                     \PY{k}{return} \PY{n}{s}
+\end{Verbatim}
+
+
+    from the above saved pythobn file import your desired class -
+RegexpReplacer
+
+from replacers import RegexpReplacer
+
+replacer= RegexpReplacer()
+
+replacer.replace(``Don't hesitate to ask questions'')
+
+    \hypertarget{performing-substitution-before-tokenization}{%
+\subsubsection{Performing substitution before
+tokenization}\label{performing-substitution-before-tokenization}}
+>>> import nltk
+>>> from nltk.tokenize import word_tokenize
+>>> from replacers import RegexpReplacer
+>>> replacer=RegexpReplacer()
+>>> word_tokenize("Don't hesitate to ask questions")
+['Do', "n't", 'hesitate', 'to', 'ask', 'questions']
+>>> word_tokenize(replacer.replace("Don't hesitate to ask questions"))
+['Do', 'not', 'hesitate', 'to', 'ask', 'questions']
+    \hypertarget{dealing-with-repeating-characters}{%
+\subsubsection{Dealing with repeating
+characters}\label{dealing-with-repeating-characters}}
+
+    Sometimes, people write words involving repeating characters that cause
+grammatical errors. For instance consider a sentence, I like it
+lotttttt. Here, lotttttt refers to lot. So now, we'll eliminate these
+repeating characters using the backreference approach, in which a
+character refers to the previous characters in a group in a regular
+expression. This is also considered one of the normalization tasks.
+#append the below class to the already created replacers.py
+
+class RepeatReplacer(object):
+    def __init__(self):
+        self.repeat_regexp = re.compile(r'(\w*)(\w)\2(\w*)')
+        self.repl = r'\1\2\3'
+    def replace(self, word):
+        repl_word = self.repeat_regexp.sub(self.repl, word)
+        if repl_word != word:
+            return self.replace(repl_word)
+        else:
+            return repl_word
+    The problem with RepeatReplacer is that it will convert happy to hapy,
+which is inappropriate. To avoid this problem, we can embed wordnet
+along with it.
+import re
+from nltk.corpus import wordnet
+class RepeatReplacer(object):
+    def __init__(self):
+        self.repeat_regexp = re.compile(r'(\w*)(\w)\2(\w*)')
+        self.repl = r'\1\2\3'
+    def replace(self, word):
+        if wordnet.synsets(word):
+            return word
+    repl_word = self.repeat_regexp.sub(self.repl, word)
+        if repl_word != word:
+            return self.replace(repl_word)
+        else:
+            return repl_word
+    \hypertarget{replacing-a-word-with-its-synonym}{%
+\subsubsection{Replacing a word with its
+synonym}\label{replacing-a-word-with-its-synonym}}
+Now we will see how we can substitute a given word by its synonym. To the already
+existing replacers.py, we can add a class called WordReplacer that provides
+mapping between a word and its synonym:
+    
+    
+class WordReplacer(object):
+def __init__(self, word_map):
+self.word_map = word_map
+def replace(self, word):
+return self.word_map.get(word, word)
+    \hypertarget{applying-zipfs-law-to-text}{%
+\section{Applying Zipf's law to text}\label{applying-zipfs-law-to-text}}
+
+    Zipf's law states that the frequency of a token in a text is directly
+proportional to its rank or position in the sorted list. This law
+describes how tokens are distributed in languages: some tokens occur
+very frequently, some occur with intermediate frequency, and some tokens
+rarely occur.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+          \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{gutenberg}
+          \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{probability} \PY{k}{import} \PY{n}{FreqDist}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{n}{matplotlib}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TkAgg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{fd} \PY{o}{=} \PY{n}{FreqDist}\PY{p}{(}\PY{p}{)}
+          \PY{k}{for} \PY{n}{text} \PY{o+ow}{in} \PY{n}{gutenberg}\PY{o}{.}\PY{n}{fileids}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{gutenberg}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{fd}\PY{p}{[}\PY{n}{word}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{ranks} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{freqs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{rank}\PY{p}{,} \PY{n}{word} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{fd}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ranks}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{rank}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{freqs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{fd}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{ranks}\PY{p}{,} \PY{n}{freqs}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{frequency(f)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{fontweight}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rank(r)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{fontweight}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{similarity-measures}{%
+\section{Similarity measures}\label{similarity-measures}}
+
+    There are many similarity measures that can be used for performing NLP
+tasks. The nltk.metrics package in NLTK is used to provide various
+evaluation or similarity measures, which is conducive to perform various
+NLP tasks. In order to test the performance of taggers, chunkers, and so
+on, in NLP, the standard scores retrieved from information retrieval can
+be used
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+          \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{o}{*}
+          \PY{n}{training}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PERSON OTHER PERSON OTHER OTHER ORGANIZATION}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+          \PY{n}{testing}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PERSON OTHER OTHER OTHER OTHER OTHER}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{accuracy}\PY{p}{(}\PY{n}{training}\PY{p}{,}\PY{n}{testing}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.6666666666666666
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{train\PYZus{}set}\PY{o}{=}\PY{n+nb}{set}\PY{p}{(}\PY{n}{training}\PY{p}{)}
+          \PY{n}{test\PYZus{}set}\PY{o}{=}\PY{n+nb}{set}\PY{p}{(}\PY{n}{testing}\PY{p}{)}
+          \PY{n}{precision}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{,}\PY{n}{test\PYZus{}set}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}113}]:} 1.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{recall}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{,}\PY{n}{test\PYZus{}set}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.6666666666666666
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f\PYZus{}measure}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{,}\PY{n}{test\PYZus{}set}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8
+
+    \end{Verbatim}
+
+    \hypertarget{applying-similarity-measures-using-ethe-edit-distance-algorithm}{%
+\section{Applying similarity measures using Ethe edit distance
+algorithm}\label{applying-similarity-measures-using-ethe-edit-distance-algorithm}}
+
+    Edit distance or the Levenshtein edit distance between two strings is
+used to compute the number of characters that can be inserted,
+substituted, or deleted in order to make two strings equal.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{o}{*}
+          \PY{n}{edit\PYZus{}distance}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}118}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{edit\PYZus{}distance}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{suggestion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calculation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:} 7
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{edit\PYZus{}distance}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sunil}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sunilkumar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}120}]:} 5
+\end{Verbatim}
+            
+    Here, when we calculate the edit distance between relate and relation,
+three operations (one substitution and two insertions) are performed.
+While calculating the edit distance between suggestion and calculation,
+seven operations (six substitutions and one insertion) are performed.
+
+    \hypertarget{applying-similarity-measures-using-jaccards-coefficient}{%
+\section{Applying similarity measures using Jaccard's
+Coefficient}\label{applying-similarity-measures-using-jaccards-coefficient}}
+
+    Jaccard's coefficient, or Tanimoto coefficient, may be defined as a
+measure of the overlap of two sets, X and Y.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{X}\PY{o}{=}\PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+          \PY{n}{Y}\PY{o}{=}\PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{jaccard\PYZus{}distance}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.6666666666666666
+
+    \end{Verbatim}
+
+    \hypertarget{applying-similarity-measures-using-the-smith-waterman-distance}{%
+\section{Applying similarity measures using the Smith Waterman
+distance}\label{applying-similarity-measures-using-the-smith-waterman-distance}}
+
+    The Smith Waterman distance is similar to edit distance. This similarity
+metric was developed in order to detect the optical alignments between
+related protein sequences and DNA. It consists of costs to be assigned
+to and functions for alphabet mapping to cost values (substitution);
+cost is also assigned to gap G (insertion or deletion)
+
+    \hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+    In this chapter, you have learned various operations that can be
+performed on a text that is a collection of strings. You have understood
+the concept of tokenization, substitution, and normalization, and
+applied various similarity measures to strings using NLTK. We have also
+discussed Zipf's law, which may be applicable to some of the existing
+documents. In the next chapter, we'll discuss various language modeling
+techniques and different NLP tasks.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
